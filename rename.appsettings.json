@@ -11,5 +11,10 @@
       "Microsoft.Hosting.Lifetime": "Information"
     }
   },
-  "AllowedHosts": "*"
+  "AllowedHosts": "*",  
+  "JWT": {  
+    "ValidAudience": "*",  
+    "ValidIssuer": "*",  
+    "Secret": "veryVeryVERYSecretKey"  
+  }
 }
