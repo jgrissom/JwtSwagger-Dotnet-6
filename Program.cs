@@ -14,6 +14,17 @@ IConfiguration configuration = new ConfigurationBuilder()
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Open",
+        builder =>
+        {
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(configuration["Data:AppIdentity:ConnectionString"]));
@@ -97,6 +108,7 @@ app.UseSwaggerUI(c => {
 });
 
 app.UseHttpsRedirection();
+app.UseCors("Open");
 app.UseFileServer();
 
 app.UseAuthentication();
