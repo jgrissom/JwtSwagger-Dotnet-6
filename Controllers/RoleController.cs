@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using JWTSwagger.Authentication;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JWTExample.Controllers
 {
+  [Authorize(Roles = "admin")]
   [Produces("application/json")]
   [Route("api/[controller]")]
   [ApiController]

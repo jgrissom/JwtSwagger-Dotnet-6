@@ -6,9 +6,11 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JWTSwagger.Controllers
 {
+  [Authorize(Roles = "admin")]
   [Produces("application/json")]
   [Route("api/[controller]")]
   [ApiController]
@@ -51,6 +53,7 @@ namespace JWTSwagger.Controllers
     }
     [HttpPost]
     [Route("register")]
+    [AllowAnonymous]
     [SwaggerOperation(summary: "User registration", null)]
     [SwaggerResponse(204, "User registered", null)]
     public async Task<IActionResult> Register([FromBody] UserRegister model)
@@ -121,6 +124,7 @@ namespace JWTSwagger.Controllers
     }
     [HttpPost]
     [Route("login")]
+    [AllowAnonymous]
     [SwaggerOperation(summary: "User login", null)]
     [SwaggerResponse(200, "Success", typeof(UserTokenDTO))]
     public async Task<IActionResult> Login([FromBody] UserLogin model)
